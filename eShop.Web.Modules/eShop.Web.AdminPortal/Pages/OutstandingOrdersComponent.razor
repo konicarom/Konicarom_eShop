@@ -1,0 +1,20 @@
+﻿@page "/outstandingorders"
+@page "/admin"
+
+@attribute [Authorize]
+
+@inject IViewOutstandingOrdersUseCase viewOutstandingOrdersUseCase
+
+<h3>Đơn đặt hàng nổi bật</h3>
+<br />
+<OrderListComponent Orders="orders"></OrderListComponent>
+
+
+@code {
+    private IEnumerable<Order> orders;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        orders = viewOutstandingOrdersUseCase.Execute();
+    }
+}

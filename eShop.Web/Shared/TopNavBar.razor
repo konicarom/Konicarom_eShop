@@ -1,0 +1,83 @@
+﻿@*<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav w-100">
+        <li class="nav-item">
+            <a class="navbar-brand" href="">eShop</a>
+        </li>
+
+        <AuthorizeView>
+            <Authorized>
+                <li class="nav-item">
+                    <a class="nav-link" href="outstandingorders">Outstanding Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="processedorders">Processed Orders</a>
+                </li>
+            </Authorized>
+        </AuthorizeView>
+
+        
+        <li class="nav-item ml-auto">
+            <AuthorizeView>
+                <Authorized>
+                    <NavLink class="nav-link" href="/logout">
+                        Sign Out
+                    </NavLink>      
+                </Authorized>
+                <NotAuthorized>
+                    <NavLink class="nav-link" href="cart">
+                        <eShop.Web.CustomerPortal.Controls.CartComponent></eShop.Web.CustomerPortal.Controls.CartComponent>
+                    </NavLink>
+                </NotAuthorized>
+            </AuthorizeView>     
+        </li>
+    </ul>
+</div>*@
+
+<link href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" rel="stylesheet">
+
+<MudAppBar Elevation="1" Dense="@dense" Style="background-color: #fff">
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Style="color: #014235 !important" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+    <MudSpacer />
+    <MudImage Src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/356405232_1479411099467797_1889535392917467248_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=730e14&_nc_ohc=JmqCqjzvgVwAX-u54ih&_nc_ht=scontent.fdad3-4.fna&oh=00_AfBC3Rsmxak-SvphnadXY1iAR8_tcs3T4pJyJJTeUTpPHg&oe=649F28D0" Alt="Mony the dog" Elevation="25" />
+    <MudSpacer />
+    <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Style="color: #014235 !important" Href="outstandingorders" />
+    <MudIconButton Icon="@Icons.Custom.Brands.Facebook" Style="color: #014235 !important" Link="https://www.facebook.com/profile.php?id=100089196613054" Target="_blank" />
+    <MudIconButton Icon="@Icons.Custom.Brands.Instagram" Style="color: #014235 !important" Link="https://instagram.com/mayanhkonicarom?igshid=YmM0MjE2YWMzOA==" Target="_blank" />
+</MudAppBar>
+
+<AuthorizeView>    
+    <NotAuthorized>
+        
+   </NotAuthorized>
+    <Authorized>
+        <MudDrawer Style="background-color: #4a9183" @bind-Open="@open" ClipMode="clipMode" Breakpoint="@breakpoint" PreserveOpenState="@preserveOpenState" Elevation="1" Variant="@DrawerVariant.Mini">
+            <MudDrawerHeader Style="background-color: #545B77">
+                <MudText Style="background-color: #5C8984" Typo="Typo.h6"></MudText>
+            </MudDrawerHeader>
+            <MudNavMenu>
+                <MudNavLink Href="outstandingorders" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Star">Đơn hàng nổi bật</MudNavLink>
+                <MudNavLink Href="processedorders" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Check">Đơn hàng đã xử lý</MudNavLink>
+                <MudNavLink Href="productrequire" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.ProductionQuantityLimits">Quản lý sản phẩm</MudNavLink>
+            </MudNavMenu>  
+        </MudDrawer>
+     </Authorized>
+</AuthorizeView>      
+
+<style>
+    .mud-navmenu.mud-navmenu-default .mud-nav-link.active:not(.mud-nav-link-disabled) {
+        color: #fff9c4;
+    }
+</style>
+
+@code {
+    bool open = false;
+    bool dense = false;
+    bool preserveOpenState = false;
+    Breakpoint breakpoint = Breakpoint.Lg;
+    DrawerClipMode clipMode = DrawerClipMode.Never;
+
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
+}

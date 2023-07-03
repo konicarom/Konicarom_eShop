@@ -1,0 +1,73 @@
+﻿@inject NavigationManager navigationManager
+
+<div class="card m-2" style="width: 25rem; background-color: #fff3cd">
+    <div class="card-body">
+        <h5 class="card-title"> Tóm tắt đơn hàng</h5>
+        <div class="card-text d-flex justify-content-between">
+            <div>
+                Thành tiền (@itemsCount):
+            </div>
+            <div>
+                @itemsTotalPrice.ToString("c")
+            </div>
+        </div>
+        <div class="card-text d-flex justify-content-between">
+            <div>
+                Vận chuyển và xử lý:
+            </div>
+            <div>
+                <text>$0.00</text>
+            </div>
+        </div>
+        <div class="card-text d-flex justify-content-between">
+            <div>
+                Thuế ước tính:
+            </div>
+            <div>
+                <text>$0.00</text>
+            </div>
+        </div>
+        <hr />
+        <div class="card-text d-flex justify-content-between" style="color:darkred">
+            <div>
+                <b>Tổng tiền:</b>
+            </div>
+            <div>
+                <b>@itemsTotalPrice.ToString("c")</b>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        @if (!HidePlaceOrder)
+        {
+            <button class="button btn-success" style="width: 100px; padding: 5px; margin: 6px" @onclick="PlaceOrder">Đặt hàng</button>
+        }       
+    </div>
+</div>
+
+
+@code {
+    int itemsCount = 0;
+    double itemsTotalPrice = 0;
+
+    [Parameter]
+    public Order order { get; set; }
+
+    [Parameter]
+    public bool HidePlaceOrder { get; set; } = false;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if(order != null)
+        {
+            itemsCount = order.LineItems.Count;
+            itemsTotalPrice = 0;
+            order.LineItems.ForEach(x => itemsTotalPrice += x.Price * x.Quantity);
+        }
+    }
+    private void PlaceOrder()
+    {
+        navigationManager.NavigateTo("/placeorder");
+    }
+}

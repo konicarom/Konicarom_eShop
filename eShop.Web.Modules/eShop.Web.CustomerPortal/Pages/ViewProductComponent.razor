@@ -1,0 +1,89 @@
+﻿@page "/product/{id:int}"
+
+@inject NavigationManager navigationManager
+
+@inject IViewProductUseCase viewProduct
+@inject IAddProductToCartUseCase addProductTocartUseCase
+
+<div class="title-products">
+    <h3>THÔNG TIN CHI TIẾT SẢN PHẨM</h3>
+</div>
+
+
+@*<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <img src="@product.ImageLink" />
+        <h5 class="card-title">@product.Name</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@product.Brand</h6>
+        <hr />
+        <p>
+            Price: <label style="color:darkred">@product.Price.ToString("c")</label>
+        </p>
+        <p class="card-text">@product.Description</p>
+    </div>
+    <button class="btn btn-primary" @onclick="AddToCart">Add To Cart</button>
+</div>*@
+
+<MudCard>
+    <div class="centered-image">
+        <MudCardMedia Image="@product.ImageLink" Height="400" Style="width: 500px"/>
+    </div>
+    
+    <hr />
+    <MudCardContent>
+        <MudText Typo="Typo.h5" Class="card-title" Style="color: #014235; font-weight: bold">@product.Name</MudText>
+        <MudText Typo="Typo.h6" Class="card-subtitle mb-2 text-muted" Style="color: #ff8f00 !important; font-style:italic">@product.Brand</MudText>
+        <MudText Typo="Typo.body2" Style="color: red; font-weight: bold">@product.Price.ToString("c")</MudText>
+        <MudText Typo="Typo.body2">@product.Description</MudText>
+    </MudCardContent>
+    <MudCardActions Class="centered-image">
+        <MudButton Variant="Variant.Text" Size="Size.Large" Style="background-color: #014235; color: #fff" OnClick="AddToCart">Thêm vào giỏ hàng</MudButton>
+    </MudCardActions>
+</MudCard>
+<br />
+<NavLink href="products" style="color: #000; font-weight: bold; font-size: 16px;">Back to Product Page</NavLink>
+
+<style>
+    .centered-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title-products {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #014235;
+        height: 80px;
+    }
+
+    h3 {
+        font-family: 'Montserrat',sans-serif;
+        font-weight: bold;
+        font-size: 40px;
+        font-style: italic;
+        color: #fff;
+        margin: unset;
+    }
+</style>
+
+@code {
+    private Product product;
+
+    [Parameter]
+    public int Id{ get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (Id > 0)
+            product = viewProduct.Execute(Id);
+    }
+
+    private void AddToCart()
+    {
+        addProductTocartUseCase.Execute(product.ProductId);
+        navigationManager.NavigateTo("/");
+    }
+}

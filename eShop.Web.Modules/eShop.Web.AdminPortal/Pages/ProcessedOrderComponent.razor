@@ -1,0 +1,19 @@
+﻿@page "/processedorders"
+
+@attribute [Authorize]
+
+@inject IViewProcessedOrderUseCase viewProcessedOrderUseCas
+
+<h3>Đơn hàng đã xử lý</h3>
+
+<br />
+<OrderListComponent Orders="orders"></OrderListComponent>
+
+@code {
+    private IEnumerable<Order> orders;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        orders = viewProcessedOrderUseCas.Execute();
+    }
+}

@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+@if(customer != null)
+{
+    <EditForm Model="customer" class="form-line" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <div class="form-group mb-2">
+            <lable for="name">Tên người nhận</lable>
+            <InputText id="name" @bind-Value="customer.CustomerName" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group mb-2">
+            <lable for="address">Địa chỉ</lable>
+            <InputText id="name" @bind-Value="customer.CustomerAddress" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group mb-2">
+            <lable for="city">Thành phố</lable>
+            <InputText id="name" @bind-Value="customer.CustomerCity" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group mb-2">
+            <lable for="province">Tỉnh</lable>
+            <InputText id="name" @bind-Value="customer.CustomerStateProvince" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group mb-2">
+            <lable for="country">Nước</lable>
+            <InputText id="name" @bind-Value="customer.CustomerCountry" class="form-control"></InputText>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Đặt hàng</button>
+    </EditForm>
+}
+
+@code {
+    private CustomerViewModel customer;
+
+    [Parameter]
+    public EventCallback<CustomerViewModel> OnCustomerInfoSubmitted{ get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        customer = new CustomerViewModel();
+    }
+
+    private void HandleValidSubmit()
+    {
+        OnCustomerInfoSubmitted.InvokeAsync(customer);
+    }
+}

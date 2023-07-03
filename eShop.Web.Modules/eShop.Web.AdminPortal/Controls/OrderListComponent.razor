@@ -1,0 +1,34 @@
+﻿
+@if(Orders != null & Orders.Count() > 0)
+{
+    <table class="table table-green">
+        <thead style="background-color: #fff;">
+            <tr>
+                <th>Date Placed</th>
+                <th>Order Id</th>
+                <th>Country</th>
+                <th>State / Province</th>
+                <th>City</th>
+                <th>Customer Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Orders)
+            {
+                <OrderItemComponent Order="order"></OrderItemComponent>
+            }
+        </tbody>
+    </table>
+}
+
+<style>
+    .table-green {
+        background-color: #fff9c4;
+        color: #000;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public IEnumerable<Order> Orders{ get; set; }
+}

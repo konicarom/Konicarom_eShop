@@ -1,0 +1,64 @@
+﻿@page "/products"
+
+@inject ISearchProductUseCase searchProduct
+
+<div class="title-products">
+    <h3>TẤT CẢ SẢN PHẨM</h3>
+</div>
+
+<br/>
+
+<SearchBarComponent OnSearch="HandleSearch"></SearchBarComponent>
+<br/>
+<br/>
+
+@if(products != null && products.Count() > 0)
+{
+    <div class="row justify-center align-center">
+        @foreach(var product in products)
+        {
+            <ProductCardComponent product="product"></ProductCardComponent>
+        }
+    </div>
+}
+else
+{
+    <text>No Products Found.</text>
+}
+
+<style>
+    .title-products{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #014235;
+        height: 80px; 
+    }
+
+    h3 {
+        font-family: 'Montserrat' ,sans-serif;
+        font-weight: bold;
+        font-size: 50px;
+        font-style: italic;
+        color: #fff;
+        margin:unset;
+    }
+</style>
+
+@code {
+    private IEnumerable<Product> products;
+
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        products = searchProduct.Execute(null);
+    }
+
+    private void HandleSearch(string filter)
+    {
+        products = searchProduct.Execute(filter);
+    }
+}

@@ -1,0 +1,122 @@
+﻿@inherits LayoutComponentBase
+@*    <main>
+        <TopNavBar></TopNavBar>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <NavMenu></NavMenu>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>*@
+
+<PageTitle>eShop.Web</PageTitle>
+<MudThemeProvider Theme="_currentTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+
+<MudLayout Style="max-width: none; padding: unset;">
+    <TopNavBar></TopNavBar>
+    <NavMenu></NavMenu>
+    <MudMainContent class="background-image pb-16">   
+        <MudContainer MaxWidth="MaxWidth.Large">
+            @Body
+        </MudContainer>
+    </MudMainContent>    
+    <link href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" rel="stylesheet">
+
+    <footer id="footer-main" class="position-relative t_footer">
+        <br />
+        <div class="container">
+            <div class="row wrapper-footer-main">
+                <div class="col-12 col-lg-3 item-col-footer">
+                    <MudImage Fluid="true" Src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/356405232_1479411099467797_1889535392917467248_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=730e14&_nc_ohc=JmqCqjzvgVwAX91Fllf&_nc_ht=scontent.fdad3-4.fna&oh=00_AfAjswaqJ9U1vBtacPBvXM_6YJrf-wko7VoeTqhC1aP_Vw&oe=64A12310" />
+                </div>
+                <div class="col-12 col-lg-3 item-col-footer">
+                    <div class="wrapper-col-footer">
+                        <div class="subTitle-footer"></div>
+                    </div>
+                    <div class="title-footer" style="color:#BE984E;">
+                        <h4>Cửa hàng máy ảnh cũ Konicarom</h4>
+                    </div>
+                    <div class="content-footer" style="color:#fff;">
+                        Địa chỉ: 206/19 Nguyễn Trường Tộ, Thành phố Huế, Thừa Thiên Huế
+                    </div>
+                    <div class="maps-footer" style="color:#BE984E;">
+                        <a href="https://goo.gl/maps/XPgPQp3xjjnEu3HS8" target="_blank" style="color:#BE984E;">
+                            <MudIconButton Class="icon-footer" Icon="@Icons.Material.Filled.LocationOn" Size="Size.Large" style="color:#D50000" target="_blank" Href="https://goo.gl/maps/XPgPQp3xjjnEu3HS8">
+                            </MudIconButton>
+                            Xem bản đồ
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 item-col-footer">
+                </div>
+                <div class="col-12 col-lg-3 item-col-footer">
+                    <div class="wrapper-col-footer">
+                        <div class="subTitle-footer-contact" style="color:#fff;">Liên hệ</div>
+                        <br />
+                        <MudIconButton Class="icon-footer" Icon="@Icons.Custom.Brands.Instagram" Style="color: #BE984E !important" Size="Size.Large" Link="https://www.instagram.com/caocao.garden/" Target="_blank" />
+                        <MudIconButton Class="icon-footer" Icon="@Icons.Custom.Brands.Facebook" Style="color: #BE984E !important" Size="Size.Large" Link="https://www.facebook.com/profile.php?id=100089196613054" Target="_blank" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </footer>
+</MudLayout>
+
+
+<style>
+    .background-image {
+        background-image: url('https://static.wixstatic.com/media/ea26fd_b068bc852e404ce7ad4a93e0792ec4a0~mv2_d_2134_1300_s_2.jpg/v1/fill/w_1331,h_1300,al_c,q_85,enc_auto/ea26fd_b068bc852e404ce7ad4a93e0792ec4a0~mv2_d_2134_1300_s_2.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .mud-main-content{
+        padding-top: 20px;
+    }
+
+    .footer{
+        background-color: #111;
+        max-width: none;
+    }
+
+    .t_footer {
+        width: 100%;
+        background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.7)),url(https://i.imgur.com/QNUHPYA.jpg) no-repeat;
+        background-size: cover;
+        background-position: center;
+        color: white;
+    }
+
+    .icon-footer span {
+        color: #BE984E !important
+    }
+</style>
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private MudTheme _currentTheme = new MudTheme()
+        {
+            Palette = new Palette
+            {
+                AppbarBackground = "#4a9183",
+
+            },
+        };
+    string searchString;
+
+
+}

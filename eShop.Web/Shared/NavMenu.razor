@@ -1,0 +1,134 @@
+﻿@*@*<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">eShop.Web</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </div>
+    </nav>
+</div>*@
+
+
+@*@code {
+    //private bool collapseNavMenu = true;
+
+    //private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    //private void ToggleNavMenu()
+    //{
+    //    collapseNavMenu = !collapseNavMenu;
+    //}
+}*@
+
+@*<MudContainer>
+    <div class="nav-tabs-container">
+        <MudTabLink Href="/home" Class="nav-link">
+            <MudIcon Icon="@Icons.Material.Filled.Home" Class="mr-2" />
+            <span>Trang chủ</span>
+        </MudTabLink>
+
+        <MudTabLink Href="/products" Class="nav-link">
+            <MudIcon Icon="@Icons.Material.Filled.ShoppingBasket" Class="mr-2" />
+            <span>Sản phẩm</span>
+        </MudTabLink>
+
+        <MudTabLink Href="/cart" Class="nav-link">
+            <MudIcon Icon="@Icons.Material.Filled.ShoppingCart" Class="mr-2" />
+            <span>Giỏ hàng</span>
+        </MudTabLink>
+
+        <MudTabLink Href="/orders" Class="nav-link">
+            <MudIcon Icon="@Icons.Material.Filled.ListAlt" Class="mr-2" />
+            <span>Orders</span>
+        </MudTabLink>
+    </div>
+</MudContainer>
+
+<style>
+    .nav-tabs-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        padding: 8px;
+    }
+
+    .nav-link {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-link:hover {
+        background-color: #e9ecef;
+    }
+
+    .nav-link.active {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .nav-link .mr-2 {
+        margin-right: 8px;
+    }
+</style>
+*@
+<MudAppBar Elevation="0">
+    <MudSpacer />
+    <MudSpacer />  
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Trang Chủ</MudNavLink>
+    <MudNavLink Href="products" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Camera">Sản Phẩm</MudNavLink>
+    <MudNavLink Href="https://www.facebook.com/konicarom" Target="_blank" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Chat">Diễn đàn</MudNavLink>
+    <MudNavLink Href="https://www.facebook.com/profile.php?id=100089196613054" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Pending">Giới thiệu</MudNavLink>
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.PeopleOutline">Liên Hệ</MudNavLink>
+    <MudSpacer />
+    <MudSpacer />
+    <NavLink class="nav-link cart" href="cart">
+        <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Inherit" Href="cart" Class="nav-link"></MudIconButton>
+        <eShop.Web.CustomerPortal.Controls.CartComponent></eShop.Web.CustomerPortal.Controls.CartComponent>
+    </NavLink>
+</MudAppBar>
+
+<style>
+    .mud-appbar.mud-appbar-fixed-top {
+        position: sticky;
+    }
+
+    .mud-nav-item {
+        width: fit-content;
+    }
+
+    .mud-nav-link, .mud-nav-link:not(.mud-nav-link-disabled) .mud-nav-link-icon.mud-nav-link-icon-default {
+        color: #fff;
+    }
+
+    .cart{
+        display: contents;
+        color: #ffffff;
+    }
+
+    .a:hover, .mud-nav-link:hover, .nav-link:hover{
+        color: #fff9c4 !important;
+    }
+</style>

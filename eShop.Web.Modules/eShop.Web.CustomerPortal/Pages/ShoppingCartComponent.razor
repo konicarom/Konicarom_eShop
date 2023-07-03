@@ -1,0 +1,66 @@
+﻿@page "/cart"
+@using eShop.UseCases.ShoppingCartScreenn.Interfaces;
+
+@inject IViewShoppingCartUseCase viewShoppingCartUseCase
+
+<div class="page-shoping-cart">
+<h3>Giỏ hàng</h3>
+<br/>
+@if(order!= null && order.LineItems != null && order.LineItems.Count > 0)
+{
+    <div class="row">
+        <div class="col-6">
+            <ul>
+                @for (int i = 0; i < order.LineItems.Count; i++)
+                {
+                    <LineItemComponent 
+                        LineItem="order.LineItems[i]"
+                        OnDeleteProduct="HandleDeleteProduct"
+                        OnUpdateQuantity="HandleUpdateQuantity"></LineItemComponent>
+
+                    @if (i < order.LineItems.Count - 1)
+                    {
+                        <li style="list-style:none">
+                            <hr />
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="col">
+            <OrderSummaryComponent order="order"></OrderSummaryComponent>
+        </div>
+    </div>
+}
+</div>
+
+<style>
+    .page-shoping-cart {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+    }
+</style>
+
+
+@code {
+    private Order order;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            order = await viewShoppingCartUseCase.Excute();
+            StateHasChanged();
+        }
+    }
+
+    private void HandleDeleteProduct(Order order)
+    {
+        this.order = order;
+    }
+    private void HandleUpdateQuantity(Order order)
+    {
+        this.order = order;
+    }
+}
